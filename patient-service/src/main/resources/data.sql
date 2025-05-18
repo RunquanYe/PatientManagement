@@ -1,157 +1,167 @@
--- Ensure the 'patient' table exists
 CREATE TABLE IF NOT EXISTS patient
 (
     id              UUID PRIMARY KEY,
     name            VARCHAR(255)        NOT NULL,
     email           VARCHAR(255) UNIQUE NOT NULL,
+    age             INT                 NOT NULL,
+    gender          VARCHAR(6)          NOT NULL,
     address         VARCHAR(255)        NOT NULL,
     date_of_birth   DATE                NOT NULL,
     registered_date DATE                NOT NULL
     );
 
--- Insert well-known UUIDs for specific patients
-INSERT INTO patient (id, name, email, address, date_of_birth, registered_date)
-SELECT '123e4567-e89b-12d3-a456-426614174000',
-       'John Doe',
-       'john.doe@example.com',
-       '123 Main St, Springfield',
+
+
+INSERT INTO patient (id, name, email, age, gender, address, date_of_birth, registered_date)
+SELECT '32178945-af7e-12d3-a456-426614174000',
+       '张伟',
+       'johnZhang@example.com',
+       37,
+       '男',
+       '北京市海淀区中关村南大街5号院3号楼',
        '1985-06-15',
-       '2024-01-10'
+       '2022-01-10'
     WHERE NOT EXISTS (SELECT 1
                   FROM patient
-                  WHERE id = '123e4567-e89b-12d3-a456-426614174000');
+                  WHERE id = '32178945-af7e-12d3-a456-426614174000');
 
-INSERT INTO patient (id, name, email, address, date_of_birth, registered_date)
-SELECT '123e4567-e89b-12d3-a456-426614174001',
-       'Jane Smith',
-       'jane.smith@example.com',
-       '456 Elm St, Shelbyville',
+INSERT INTO patient (id, name, email, age, gender, address, date_of_birth, registered_date)
+SELECT '32178945-af7e-12d3-a456-426614174001',
+       '李娜',
+       'janeLi@example.com',
+       32,
+       '女',
+       '上海市浦东新区张江高科技园区科苑路88号',
        '1990-09-23',
-       '2023-12-01'
+       '2022-12-01'
     WHERE NOT EXISTS (SELECT 1
                   FROM patient
-                  WHERE id = '123e4567-e89b-12d3-a456-426614174001');
+                  WHERE id = '32178945-af7e-12d3-a456-426614174001');
 
-INSERT INTO patient (id, name, email, address, date_of_birth, registered_date)
-SELECT '123e4567-e89b-12d3-a456-426614174002',
-       'Alice Johnson',
-       'alice.johnson@example.com',
-       '789 Oak St, Capital City',
+INSERT INTO patient (id, name, email, age, gender, address, date_of_birth, registered_date)
+VALUES ('32178945-af7e-12d3-a456-426614174002',
+       '李明',
+       'aliceLi@example.com',
+       44,
+       '男',
+       '广州市天河区体育西路103号维多利广场A座',
        '1978-03-12',
-       '2022-06-20'
-    WHERE NOT EXISTS (SELECT 1
-                  FROM patient
-                  WHERE id = '123e4567-e89b-12d3-a456-426614174002');
+       '2022-06-20');
 
-INSERT INTO patient (id, name, email, address, date_of_birth, registered_date)
-SELECT '123e4567-e89b-12d3-a456-426614174003',
-       'Bob Brown',
-       'bob.brown@example.com',
-       '321 Pine St, Springfield',
+INSERT INTO patient (id, name, email, age, gender, address, date_of_birth, registered_date)
+VALUES ('32178945-af7e-12d3-a456-426614174003',
+       '王芳',
+       'emilyWang@example.com',
+       40,
+       '女',
+       '深圳市南山区科技园路1号腾讯大厦',
        '1982-11-30',
-       '2023-05-14'
-    WHERE NOT EXISTS (SELECT 1
-                  FROM patient
-                  WHERE id = '123e4567-e89b-12d3-a456-426614174003');
+       '2022-05-14');
 
-INSERT INTO patient (id, name, email, address, date_of_birth, registered_date)
-SELECT '123e4567-e89b-12d3-a456-426614174004',
-       'Emily Davis',
-       'emily.davis@example.com',
-       '654 Maple St, Shelbyville',
+INSERT INTO patient (id, name, email, age, gender, address, date_of_birth, registered_date)
+VALUES ('32178945-af7e-12d3-a456-426614174004',
+       '王强',
+       'davisWang@example.com',
+       27,
+       '男',
+       '成都市武侯区人民南路四段12号华润大厦',
        '1995-02-05',
-       '2024-03-01'
-    WHERE NOT EXISTS (SELECT 1
-                  FROM patient
-                  WHERE id = '123e4567-e89b-12d3-a456-426614174004');
+       '2022-03-01');
 
--- Insert well-known UUIDs for specific patients
-INSERT INTO patient (id, name, email, address, date_of_birth, registered_date)
-SELECT '223e4567-e89b-12d3-a456-426614174005',
-       'Michael Green',
-       'michael.green@example.com',
-       '987 Cedar St, Springfield',
+
+INSERT INTO patient (id, name, email, age, gender, address, date_of_birth, registered_date)
+VALUES ('32178945-af7e-12d3-a456-426614174005',
+       '刘洋',
+       'michaelLiu@example.com',
+       34,
+       '男',
+       '杭州市西湖区文三路478号华星时代广场',
        '1988-07-25',
-       '2024-02-15'
-    WHERE NOT EXISTS (SELECT 1 FROM patient WHERE id = '223e4567-e89b-12d3-a456-426614174005');
+       '2022-02-15');
 
-INSERT INTO patient (id, name, email, address, date_of_birth, registered_date)
-SELECT '223e4567-e89b-12d3-a456-426614174006',
-       'Sarah Taylor',
-       'sarah.taylor@example.com',
-       '123 Birch St, Shelbyville',
+INSERT INTO patient (id, name, email, age, gender, address, date_of_birth, registered_date)
+VALUES ( '32178945-af7e-12d3-a456-426614174006',
+       '陈浩',
+       'davidChen@example.com',
+       30,
+       '男',
+       '武汉市洪山区珞喻路726号光谷世界城',
        '1992-04-18',
-       '2023-08-25'
-    WHERE NOT EXISTS (SELECT 1 FROM patient WHERE id = '223e4567-e89b-12d3-a456-426614174006');
+       '2022-08-25');
 
-INSERT INTO patient (id, name, email, address, date_of_birth, registered_date)
-SELECT '223e4567-e89b-12d3-a456-426614174007',
-       'David Wilson',
-       'david.wilson@example.com',
-       '456 Ash St, Capital City',
+INSERT INTO patient (id, name, email, age, gender, address, date_of_birth, registered_date)
+VALUES ( '32178945-af7e-12d3-a456-426614174007',
+       '张丽',
+       'sarahZhang@example.com',
+       47,
+       '女',
+       '南京市鼓楼区中山北路30号紫峰大厦',
        '1975-01-11',
-       '2022-10-10'
-    WHERE NOT EXISTS (SELECT 1 FROM patient WHERE id = '223e4567-e89b-12d3-a456-426614174007');
+       '2022-10-10');
 
-INSERT INTO patient (id, name, email, address, date_of_birth, registered_date)
-SELECT '223e4567-e89b-12d3-a456-426614174008',
-       'Laura White',
-       'laura.white@example.com',
-       '789 Palm St, Springfield',
+INSERT INTO patient (id, name, email, age, gender, address, date_of_birth, registered_date)
+VALUES ('32178945-af7e-12d3-a456-426614174008',
+       '刘婷',
+       'lauraLiu@example.com',
+       33,
+       '女',
+       '西安市雁塔区小寨西路26号赛格国际购物中心',
        '1989-09-02',
-       '2024-04-20'
-    WHERE NOT EXISTS (SELECT 1 FROM patient WHERE id = '223e4567-e89b-12d3-a456-426614174008');
+       '2022-04-20');
 
-INSERT INTO patient (id, name, email, address, date_of_birth, registered_date)
-SELECT '223e4567-e89b-12d3-a456-426614174009',
-       'James Harris',
-       'james.harris@example.com',
-       '321 Cherry St, Shelbyville',
+
+INSERT INTO patient (id, name, email, age, gender, address, date_of_birth, registered_date)
+VALUES ('32178945-af7e-12d3-a456-426614174009',
+       '陈雪',
+       'jennyChen@example.com',
+       29,
+       '女',
+       '重庆市渝中区解放碑民权路28号英利国际金融中心',
        '1993-11-15',
-       '2023-06-30'
-    WHERE NOT EXISTS (SELECT 1 FROM patient WHERE id = '223e4567-e89b-12d3-a456-426614174009');
+       '2022-06-30'),
 
-INSERT INTO patient (id, name, email, address, date_of_birth, registered_date)
-SELECT '223e4567-e89b-12d3-a456-426614174010',
-       'Emma Moore',
-       'emma.moore@example.com',
-       '654 Spruce St, Capital City',
+('32178945-af7e-12d3-a456-426614174010',
+       '周杰',
+       'ethanZhou@example.com',
+       42,
+       '男',
+       '苏州市工业园区星湖街328号创意产业园',
        '1980-08-09',
-       '2023-01-22'
-    WHERE NOT EXISTS (SELECT 1 FROM patient WHERE id = '223e4567-e89b-12d3-a456-426614174010');
+       '2022-01-22'),
 
-INSERT INTO patient (id, name, email, address, date_of_birth, registered_date)
-SELECT '223e4567-e89b-12d3-a456-426614174011',
-       'Ethan Martinez',
-       'ethan.martinez@example.com',
-       '987 Redwood St, Springfield',
+('32178945-af7e-12d3-a456-426614174011',
+       '吴宇',
+       'danielWu@example.com',
+       38,
+       '男',
+       '长沙市岳麓区麓谷大道658号芯城科技园',
        '1984-05-03',
-       '2024-05-12'
-    WHERE NOT EXISTS (SELECT 1 FROM patient WHERE id = '223e4567-e89b-12d3-a456-426614174011');
+       '2022-05-12'),
 
-INSERT INTO patient (id, name, email, address, date_of_birth, registered_date)
-SELECT '223e4567-e89b-12d3-a456-426614174012',
-       'Sophia Clark',
-       'sophia.clark@example.com',
-       '123 Hickory St, Shelbyville',
+('32178945-af7e-12d3-a456-426614174012',
+       '徐阳',
+       'sophiaXu@example.com',
+       31,
+       '女',
+       '天津市和平区南京路189号津汇广场',
        '1991-12-25',
-       '2022-11-11'
-    WHERE NOT EXISTS (SELECT 1 FROM patient WHERE id = '223e4567-e89b-12d3-a456-426614174012');
+       '2022-11-11'),
 
-INSERT INTO patient (id, name, email, address, date_of_birth, registered_date)
-SELECT '223e4567-e89b-12d3-a456-426614174013',
-       'Daniel Lewis',
-       'daniel.lewis@example.com',
-       '456 Cypress St, Capital City',
+
+ ('32178945-af7e-12d3-a456-426614174013',
+       '陈雪',
+       'emmaChen@example.com',
+       46,
+       '女',
+       '青岛市市南区香港中路76号颐和国际大厦',
        '1976-06-08',
-       '2023-09-19'
-    WHERE NOT EXISTS (SELECT 1 FROM patient WHERE id = '223e4567-e89b-12d3-a456-426614174013');
+       '2022-09-19'),
 
-INSERT INTO patient (id, name, email, address, date_of_birth, registered_date)
-SELECT '223e4567-e89b-12d3-a456-426614174014',
-       'Isabella Walker',
-       'isabella.walker@example.com',
-       '789 Willow St, Springfield',
+('32178945-af7e-12d3-a456-426614174014',
+       '杨雨',
+       'isabellaYang@example.com',
+       35,
+       '女',
+       '厦门市思明区湖滨南路819号宝福大厦',
        '1987-10-17',
-       '2024-03-29'
-    WHERE NOT EXISTS (SELECT 1 FROM patient WHERE id = '223e4567-e89b-12d3-a456-426614174014');
+       '2022-03-29');
