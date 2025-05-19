@@ -1,19 +1,27 @@
+-- Drop the table (if safe to do so)
+DROP TABLE IF EXISTS patient;
+
 CREATE TABLE IF NOT EXISTS patient
 (
-    id              UUID PRIMARY KEY,
-    name            VARCHAR(255)        NOT NULL,
-    email           VARCHAR(255) UNIQUE NOT NULL,
-    age             INT                 NOT NULL,
-    gender          VARCHAR(6)          NOT NULL,
-    address         VARCHAR(255)        NOT NULL,
-    date_of_birth   DATE                NOT NULL,
-    registered_date DATE                NOT NULL
+    id              VARCHAR(255)      PRIMARY KEY,
+    name            VARCHAR(255)            NOT NULL,
+    email           VARCHAR(255) UNIQUE     NOT NULL,
+    age             INT                     NOT NULL,
+    gender          VARCHAR(6)              NOT NULL,
+    address         VARCHAR(255)            NOT NULL,
+    date_of_birth   DATE                    NOT NULL,
+    registered_date DATE                    NOT NULL,
+    FOREIGN KEY (id) REFERENCES patient(id)
     );
 
+CREATE INDEX idx_patient_email ON patient(email);
+CREATE INDEX idx_patient_name ON patient(name);
+
+ALTER TABLE patient ADD CONSTRAINT chk_gender CHECK (gender IN ('男', '女'));
 
 
 INSERT INTO patient (id, name, email, age, gender, address, date_of_birth, registered_date)
-SELECT '32178945-af7e-12d3-a456-426614174000',
+SELECT 'psmp001',
        '张伟',
        'johnZhang@example.com',
        37,
@@ -23,10 +31,10 @@ SELECT '32178945-af7e-12d3-a456-426614174000',
        '2022-01-10'
     WHERE NOT EXISTS (SELECT 1
                   FROM patient
-                  WHERE id = '32178945-af7e-12d3-a456-426614174000');
+                  WHERE id = 'psmp001');
 
 INSERT INTO patient (id, name, email, age, gender, address, date_of_birth, registered_date)
-SELECT '32178945-af7e-12d3-a456-426614174001',
+SELECT 'psmp002',
        '李娜',
        'janeLi@example.com',
        32,
@@ -36,10 +44,10 @@ SELECT '32178945-af7e-12d3-a456-426614174001',
        '2022-12-01'
     WHERE NOT EXISTS (SELECT 1
                   FROM patient
-                  WHERE id = '32178945-af7e-12d3-a456-426614174001');
+                  WHERE id = 'psmp002');
 
 INSERT INTO patient (id, name, email, age, gender, address, date_of_birth, registered_date)
-VALUES ('32178945-af7e-12d3-a456-426614174002',
+VALUES ('psmp003',
        '李明',
        'aliceLi@example.com',
        44,
@@ -49,7 +57,7 @@ VALUES ('32178945-af7e-12d3-a456-426614174002',
        '2022-06-20');
 
 INSERT INTO patient (id, name, email, age, gender, address, date_of_birth, registered_date)
-VALUES ('32178945-af7e-12d3-a456-426614174003',
+VALUES ('psmp004',
        '王芳',
        'emilyWang@example.com',
        40,
@@ -59,7 +67,7 @@ VALUES ('32178945-af7e-12d3-a456-426614174003',
        '2022-05-14');
 
 INSERT INTO patient (id, name, email, age, gender, address, date_of_birth, registered_date)
-VALUES ('32178945-af7e-12d3-a456-426614174004',
+VALUES ('psmp005',
        '王强',
        'davisWang@example.com',
        27,
@@ -70,7 +78,7 @@ VALUES ('32178945-af7e-12d3-a456-426614174004',
 
 
 INSERT INTO patient (id, name, email, age, gender, address, date_of_birth, registered_date)
-VALUES ('32178945-af7e-12d3-a456-426614174005',
+VALUES ('psmp006',
        '刘洋',
        'michaelLiu@example.com',
        34,
@@ -80,7 +88,7 @@ VALUES ('32178945-af7e-12d3-a456-426614174005',
        '2022-02-15');
 
 INSERT INTO patient (id, name, email, age, gender, address, date_of_birth, registered_date)
-VALUES ( '32178945-af7e-12d3-a456-426614174006',
+VALUES ( 'psmp007',
        '陈浩',
        'davidChen@example.com',
        30,
@@ -90,7 +98,7 @@ VALUES ( '32178945-af7e-12d3-a456-426614174006',
        '2022-08-25');
 
 INSERT INTO patient (id, name, email, age, gender, address, date_of_birth, registered_date)
-VALUES ( '32178945-af7e-12d3-a456-426614174007',
+VALUES ( 'psmp008',
        '张丽',
        'sarahZhang@example.com',
        47,
@@ -100,7 +108,7 @@ VALUES ( '32178945-af7e-12d3-a456-426614174007',
        '2022-10-10');
 
 INSERT INTO patient (id, name, email, age, gender, address, date_of_birth, registered_date)
-VALUES ('32178945-af7e-12d3-a456-426614174008',
+VALUES ('psmp009',
        '刘婷',
        'lauraLiu@example.com',
        33,
@@ -111,7 +119,7 @@ VALUES ('32178945-af7e-12d3-a456-426614174008',
 
 
 INSERT INTO patient (id, name, email, age, gender, address, date_of_birth, registered_date)
-VALUES ('32178945-af7e-12d3-a456-426614174009',
+VALUES ('psmp010',
        '陈雪',
        'jennyChen@example.com',
        29,
@@ -120,7 +128,7 @@ VALUES ('32178945-af7e-12d3-a456-426614174009',
        '1993-11-15',
        '2022-06-30'),
 
-('32178945-af7e-12d3-a456-426614174010',
+('psmp011',
        '周杰',
        'ethanZhou@example.com',
        42,
@@ -129,7 +137,7 @@ VALUES ('32178945-af7e-12d3-a456-426614174009',
        '1980-08-09',
        '2022-01-22'),
 
-('32178945-af7e-12d3-a456-426614174011',
+('psmp012',
        '吴宇',
        'danielWu@example.com',
        38,
@@ -138,7 +146,7 @@ VALUES ('32178945-af7e-12d3-a456-426614174009',
        '1984-05-03',
        '2022-05-12'),
 
-('32178945-af7e-12d3-a456-426614174012',
+('psmp013',
        '徐阳',
        'sophiaXu@example.com',
        31,
@@ -148,7 +156,7 @@ VALUES ('32178945-af7e-12d3-a456-426614174009',
        '2022-11-11'),
 
 
- ('32178945-af7e-12d3-a456-426614174013',
+ ('psmp014',
        '陈雪',
        'emmaChen@example.com',
        46,
@@ -157,7 +165,7 @@ VALUES ('32178945-af7e-12d3-a456-426614174009',
        '1976-06-08',
        '2022-09-19'),
 
-('32178945-af7e-12d3-a456-426614174014',
+('psmp015',
        '杨雨',
        'isabellaYang@example.com',
        35,
